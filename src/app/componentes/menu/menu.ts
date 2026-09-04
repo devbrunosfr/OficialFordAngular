@@ -1,18 +1,11 @@
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
 export class Menu {
 
-  mostrarElemento = false;
-
-  mostrar() {
-    this.mostrarElemento = !this.mostrarElemento
-  }
 }

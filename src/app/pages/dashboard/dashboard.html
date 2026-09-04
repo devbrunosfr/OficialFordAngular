@@ -1,1 +1,97 @@
-<p>dashboard works!</p>
+<div class="dashboard-page">
+
+  <header class="dashboard-header">
+    <button class="icon-btn hamburger" (click)="toggleSidebar()" [class.open]="isSidebarOpen"
+            aria-label="Abrir menu lateral">
+      <span></span><span></span><span></span>
+    </button>
+
+    <h1 class="dashboard-title">Dashboard FORD</h1>
+
+    <div class="user-menu">
+      <button class="icon-btn user-btn" (click)="toggleUserMenu()" aria-label="Abrir menu do usuário">
+        <span class="user-avatar">A</span>
+        <span class="chevron" [class.open]="isUserMenuOpen">&#9662;</span>
+      </button>
+      <div class="user-dropdown" *ngIf="isUserMenuOpen">
+        <a href="javascript:void(0)" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="cards-row">
+
+    <div class="card card-veiculo">
+      <label class="card-label">Veículo</label>
+      <div class="custom-select">
+        <button class="select-btn" (click)="toggleVeiculoDropdown()">
+          {{ veiculoSelecionado.nome }}
+          <span class="chevron" [class.open]="isVeiculoDropdownOpen">&#9662;</span>
+        </button>
+        <ul class="select-options" *ngIf="isVeiculoDropdownOpen">
+          <li *ngFor="let v of veiculos"
+              [class.selected]="v.nome === veiculoSelecionado.nome"
+              (click)="selecionarVeiculo(v)">
+            {{ v.nome }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Total de Vendas</span>
+      <strong class="card-value">{{ veiculoSelecionado.totalVendas }}</strong>
+      <span class="card-unit">Und.</span>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Conectados</span>
+      <strong class="card-value">{{ veiculoSelecionado.conectados }}</strong>
+      <span class="card-unit">Und.</span>
+    </div>
+
+    <div class="card">
+      <span class="card-label">Update Software</span>
+      <strong class="card-value">{{ veiculoSelecionado.updateSoftware }}</strong>
+      <span class="card-unit">Und.</span>
+    </div>
+
+  </section>
+
+  <section class="veiculo-preview">
+   
+  </section>
+
+  <section class="tabela-veiculo">
+    <table>
+      <thead>
+        <tr>
+          <th>Código - Vin</th>
+          <th>Odômetro</th>
+          <th>Nível de Combustível</th>
+          <th>Status</th>
+          <th>Lat.</th>
+          <th>Long.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ veiculoSelecionado.vin }}</td>
+          <td>{{ veiculoSelecionado.odometro }}Km</td>
+          <td>{{ veiculoSelecionado.combustivel }} %</td>
+          <td>
+            <span class="status-badge" [class.on]="veiculoSelecionado.status === 'on'"
+                  [class.off]="veiculoSelecionado.status === 'off'">
+              {{ veiculoSelecionado.status }}
+            </span>
+          </td>
+          <td>{{ veiculoSelecionado.lat }}</td>
+          <td>{{ veiculoSelecionado.long }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="dashboard-footer-bar"></footer>
+
+</div>

@@ -1,1 +1,17 @@
-<p>Hello world</p>
+    
+<div class="menu-lateral" [class.aberto]="menuAberto">
+  <img src="img/ford.png" alt="Logo Ford" class="logo-menu">
+  <a routerLink="/home">Home</a>
+  <a routerLink="/dashboard">Dashboard</a>
+  <a href="#" (click)="logout(); $event.preventDefault()">Logout</a>
+</div>
+
+<div class="conteudo">
+  <div class="icone-menu" (click)="alternarMenu()">&#9776;</div>
+  <img src="img/ranger.png" alt="Ford Ranger" class="imagem-fundo">
+
+  <div class="cartao-boas-vindas">
+    <h3>Sistema de dados FORD</h3>
+    <p>Seja bem vindo(a)!</p>
+  </div>
+</div>

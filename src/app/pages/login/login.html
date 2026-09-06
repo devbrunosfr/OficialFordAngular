@@ -10,9 +10,9 @@
 
       <h2>Boas-vindas</h2>
 
-      <form id="formLogin">
-        <input type="text" id="usuario" placeholder="Insira seu e-mail" required>
-        <input type="password" id="senha" placeholder="Insira sua senha" required>
+      <form #loginFrom="ngForm" (ngSubmit)="login()" id="formLogin">
+        <input type="text" name="nome" [(ngModel)]="usuario.nome" id="usuario" placeholder="Insira seu login" required>
+        <input type="password" name="senha" [(ngModel)]="usuario.senha" id="senha" placeholder="Insira sua senha" required>
 
         <div class="opcao-logar">
           <span>Logar automaticamente</span>
@@ -21,10 +21,8 @@
 
         <button type="submit">Entrar</button>
 
-        <p id="mensagemErro"></p>
+        <p id="mensagemErro" *ngIf="mensagemDeErro">{{ mensagemDeErro }}</p>
       </form>
     </div>
 
   </div>
-
-  <script src="login.js"></script>

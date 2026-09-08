@@ -1,1 +1,10 @@
-<p>Hello world</p>
+<div class="menu-overlay" *ngIf="aberto" (click)="fechar()"></div>
+
+<aside class="menu-lateral" [class.aberto]="aberto">
+  <img src="img/ford.png" alt="Logo Ford" class="logo-menu">
+
+  <nav class="menu-links">
+    <a routerLink="/home" routerLinkActive="ativo" (click)="fechar()">Home</a>
+    <a routerLink="/dashboard" routerLinkActive="ativo" (click)="fechar()">Dashboard</a>
+  </nav>
+</aside>

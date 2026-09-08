@@ -17,7 +17,7 @@ interface LoginResponse {
   providedIn: 'root',
 })
 export class Auth {
-  private apiUrl = 'http://localhost:3001'; // ajuste a porta/URL conforme seu api.js
+  private apiUrl = 'http://localhost:3001'; 
  
   constructor(private http: HttpClient) {}
  

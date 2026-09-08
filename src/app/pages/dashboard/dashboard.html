@@ -1,5 +1,7 @@
 <div class="dashboard-page">
 
+  <app-menu [aberto]="isSidebarOpen" (fecharMenu)="isSidebarOpen = false"></app-menu>
+
   <header class="dashboard-header">
     <button class="icon-btn hamburger" (click)="toggleSidebar()" [class.open]="isSidebarOpen"
             aria-label="Abrir menu lateral">

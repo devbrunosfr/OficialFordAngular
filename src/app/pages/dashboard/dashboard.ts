@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Menu } from '../../componentes/menu/menu';
 
 interface Veiculo {
   nome: string;
@@ -19,7 +21,7 @@ interface Veiculo {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Menu],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
@@ -27,6 +29,8 @@ export class DashboardComponent {
   isUserMenuOpen = false;
   isVeiculoDropdownOpen = false;
   isSidebarOpen = false;
+
+  constructor(private router: Router) {}
 
   veiculos: Veiculo[] = [
     {
@@ -105,6 +109,6 @@ export class DashboardComponent {
 
   logout(): void {
     this.isUserMenuOpen = false;
-    // TODO: integrar com o serviço de autenticação real do projeto
+    this.router.navigate(['/login']);
   }
 }

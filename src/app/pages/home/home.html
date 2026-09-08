@@ -1,17 +1,35 @@
-    
-<div class="menu-lateral" [class.aberto]="menuAberto">
-  <img src="img/ford.png" alt="Logo Ford" class="logo-menu">
-  <a routerLink="/home">Home</a>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a href="#" (click)="logout(); $event.preventDefault()">Logout</a>
-</div>
+<div class="home-page">
 
-<div class="conteudo">
-  <div class="icone-menu" (click)="alternarMenu()">&#9776;</div>
-  <img src="img/ranger.png" alt="Ford Ranger" class="imagem-fundo">
+  <app-menu [aberto]="isSidebarOpen" (fecharMenu)="isSidebarOpen = false"></app-menu>
 
-  <div class="cartao-boas-vindas">
-    <h3>Sistema de dados FORD</h3>
-    <p>Seja bem vindo(a)!</p>
-  </div>
+  <header class="home-header">
+    <button class="icon-btn hamburger" (click)="toggleSidebar()" [class.open]="isSidebarOpen"
+            aria-label="Abrir menu lateral">
+      <span></span><span></span><span></span>
+    </button>
+
+    <h1 class="home-title">Home</h1>
+
+    <div class="user-menu">
+      <button class="icon-btn user-btn" (click)="toggleUserMenu()" aria-label="Abrir menu do usuário">
+        <span class="user-avatar">A</span>
+        <span class="chevron" [class.open]="isUserMenuOpen">&#9662;</span>
+      </button>
+      <div class="user-dropdown" *ngIf="isUserMenuOpen">
+        <a href="javascript:void(0)" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="conteudo">
+    <img src="img/ranger.png" alt="Ford Ranger" class="imagem-fundo">
+
+    <div class="cartao-boas-vindas">
+      <h3>Sistema de dados FORD</h3>
+      <p>Seja bem vindo(a)!</p>
+    </div>
+  </section>
+
+  <footer class="home-footer-bar"></footer>
+
 </div>

@@ -54,14 +54,14 @@
 }
 
 .user-avatar {
-  width: 26px;
-  height: 26px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #e2e2e2;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -77,25 +77,28 @@
 .user-dropdown {
   position: absolute;
   right: 0;
-  top: 36px;
+  top: 46px;
   background: #ffffff;
   border: 1px solid #e2e2e2;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  min-width: 100px;
+  min-width: 140px;
+  padding: 6px;
   z-index: 10;
 }
 
 .user-dropdown a {
   display: block;
+  text-align: center;
   padding: 8px 12px;
-  color: #1c1c1c;
+  color: #c0392b;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .user-dropdown a:hover {
-  background: #f5f5f5;
+  text-decoration: underline;
 }
 
 
@@ -217,14 +220,12 @@ tbody td {
   color: #c0392b;
 }
 
-/* ===== Rodapé ===== */
 .dashboard-footer-bar {
   margin-top: auto;
   height: 14px;
   background: #16357a;
 }
 
-/* ===== Responsivo ===== */
 @media (max-width: 640px) {
   .dashboard-title {
     font-size: 16px;

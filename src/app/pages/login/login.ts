@@ -25,6 +25,7 @@ export class Login {
     this.auth.login(this.usuario).subscribe
     ({
       next:(response) => {
+        this.auth.setLogado();
         this.router.navigate(['/home']);
       },
       error:(err) => {

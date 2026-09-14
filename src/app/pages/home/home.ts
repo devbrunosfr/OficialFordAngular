@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Menu } from '../../componentes/menu/menu';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent {
   isSidebarOpen = false;
   isUserMenuOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: Auth) {}
 
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
@@ -27,6 +28,7 @@ export class HomeComponent {
 
   logout(): void {
     this.isUserMenuOpen = false;
+    this.auth.logout();
     this.router.navigate(['/login']);
   }
 }

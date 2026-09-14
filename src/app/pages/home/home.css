@@ -139,12 +139,6 @@
   font-size: 18px;
 }
 
-.home-footer-bar {
-  margin-top: auto;
-  height: 14px;
-  background: #16357a;
-}
-
 @media (max-width: 640px) {
   .home-title {
     font-size: 16px;

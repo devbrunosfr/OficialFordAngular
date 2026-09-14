@@ -15,7 +15,7 @@ body {
 }
 
 .lado-imagem {
-  flex: 1;
+  flex: 1.4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@ body {
 }
 
 .lado-imagem img {
-  max-width: 90%;
+  max-width: 100%;
 }
 
 
@@ -88,4 +88,26 @@ button:hover {
   margin-top: 10px;
   font-size: 14px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .lado-imagem {
+    flex: none;
+    padding: 20px 20px 0;
+  }
+
+  .lado-imagem img {
+    max-width: 80%;
+  }
+
+  .lado-login {
+    flex: none;
+    padding: 20px;
+  }
 }

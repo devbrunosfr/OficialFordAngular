@@ -61,11 +61,20 @@
   </section>
 
   <section class="veiculo-preview">
-   
+    <img [src]="veiculoSelecionado.imagem" [alt]="veiculoSelecionado.nome" class="imagem-veiculo-central">
   </section>
 
   <section class="tabela-veiculo">
-    <table>
+
+    <div class="busca-vin">
+      <input type="text" [(ngModel)]="codigoBusca" (keyup.enter)="buscarVeiculo()"
+             placeholder="Buscar por código do veículo (VIN)" aria-label="Buscar por código do veículo">
+      <button type="button" (click)="buscarVeiculo()">Buscar</button>
+    </div>
+
+    <p class="mensagem-busca" *ngIf="mensagemBusca">{{ mensagemBusca }}</p>
+
+    <table *ngIf="!mensagemBusca">
       <thead>
         <tr>
           <th>Código - Vin</th>
@@ -78,22 +87,20 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ veiculoSelecionado.vin }}</td>
-          <td>{{ veiculoSelecionado.odometro }}Km</td>
-          <td>{{ veiculoSelecionado.combustivel }} %</td>
+          <td>{{ veiculoTabela.vin }}</td>
+          <td>{{ veiculoTabela.odometro }}Km</td>
+          <td>{{ veiculoTabela.combustivel }} %</td>
           <td>
-            <span class="status-badge" [class.on]="veiculoSelecionado.status === 'on'"
-                  [class.off]="veiculoSelecionado.status === 'off'">
-              {{ veiculoSelecionado.status }}
+            <span class="status-badge" [class.on]="veiculoTabela.status === 'on'"
+                  [class.off]="veiculoTabela.status === 'off'">
+              {{ veiculoTabela.status }}
             </span>
           </td>
-          <td>{{ veiculoSelecionado.lat }}</td>
-          <td>{{ veiculoSelecionado.long }}</td>
+          <td>{{ veiculoTabela.lat }}</td>
+          <td>{{ veiculoTabela.long }}</td>
         </tr>
       </tbody>
     </table>
   </section>
-
-  <footer class="dashboard-footer-bar"></footer>
 
 </div>

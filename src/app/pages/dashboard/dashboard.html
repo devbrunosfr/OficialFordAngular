@@ -21,63 +21,74 @@
     </div>
   </header>
 
-  <section class="cards-row">
+  <div class="topo-veiculo" #topoVeiculo>
+  <p class="mensagem-busca" *ngIf="erroVeiculos">{{ erroVeiculos }}</p>
+  <p class="carregando" *ngIf="carregandoVeiculos">Carregando veículos...</p>
+
+  <section class="cards-row" *ngIf="!carregandoVeiculos && veiculoSelecionado">
 
     <div class="card card-veiculo">
-      <label class="card-label">Veículo</label>
+      <label class="card-label" for="busca-veiculo">Veículo</label>
       <div class="custom-select">
-        <button class="select-btn" (click)="toggleVeiculoDropdown()">
-          {{ veiculoSelecionado.nome }}
-          <span class="chevron" [class.open]="isVeiculoDropdownOpen">&#9662;</span>
-        </button>
+        <input
+          id="busca-veiculo"
+          class="select-btn"
+          type="text"
+          [formControl]="buscaVeiculoControl"
+          (focus)="isVeiculoDropdownOpen = true"
+          [placeholder]="veiculoSelecionado.vehicle"
+          autocomplete="off">
         <ul class="select-options" *ngIf="isVeiculoDropdownOpen">
-          <li *ngFor="let v of veiculos"
-              [class.selected]="v.nome === veiculoSelecionado.nome"
+          <li *ngFor="let v of veiculosFiltrados"
+              [class.selected]="v.vehicle === veiculoSelecionado.vehicle"
               (click)="selecionarVeiculo(v)">
-            {{ v.nome }}
+            {{ v.vehicle }}
           </li>
+          <li *ngIf="veiculosFiltrados.length === 0" class="sem-resultado">Nenhum modelo encontrado</li>
         </ul>
       </div>
     </div>
 
     <div class="card">
       <span class="card-label">Total de Vendas</span>
-      <strong class="card-value">{{ veiculoSelecionado.totalVendas }}</strong>
+      <strong class="card-value">{{ veiculoSelecionado.volumetotal }}</strong>
       <span class="card-unit">Und.</span>
     </div>
 
     <div class="card">
       <span class="card-label">Conectados</span>
-      <strong class="card-value">{{ veiculoSelecionado.conectados }}</strong>
+      <strong class="card-value">{{ veiculoSelecionado.connected }}</strong>
       <span class="card-unit">Und.</span>
     </div>
 
     <div class="card">
       <span class="card-label">Update Software</span>
-      <strong class="card-value">{{ veiculoSelecionado.updateSoftware }}</strong>
+      <strong class="card-value">{{ veiculoSelecionado.softwareUpdates }}</strong>
       <span class="card-unit">Und.</span>
     </div>
 
   </section>
 
-  <section class="veiculo-preview">
-    <img [src]="veiculoSelecionado.imagem" [alt]="veiculoSelecionado.nome" class="imagem-veiculo-central">
+  <section class="veiculo-preview" *ngIf="veiculoSelecionado">
+    <img [src]="imagemDoVeiculo(veiculoSelecionado)" [alt]="veiculoSelecionado.vehicle" class="imagem-veiculo-central">
   </section>
+  </div>
 
   <section class="tabela-veiculo">
 
     <div class="busca-vin">
-      <input type="text" [(ngModel)]="codigoBusca" (keyup.enter)="buscarVeiculo()"
-             placeholder="Buscar por código do veículo (VIN)" aria-label="Buscar por código do veículo">
-      <button type="button" (click)="buscarVeiculo()">Buscar</button>
+      <input type="text" [formControl]="buscaPinControl" (keyup.enter)="buscarVeiculoPorPin()"
+             placeholder="Buscar por código do veículo (PIN)" aria-label="Buscar por código do veículo (PIN)">
+      <button type="button" (click)="buscarVeiculoPorPin()">Buscar</button>
     </div>
 
-    <p class="mensagem-busca" *ngIf="mensagemBusca">{{ mensagemBusca }}</p>
+    <p class="carregando" *ngIf="carregandoTabela">Buscando dados do veículo...</p>
+    <p class="mensagem-busca" *ngIf="mensagemBusca && !carregandoTabela">{{ mensagemBusca }}</p>
 
-    <table *ngIf="!mensagemBusca">
+    <table *ngIf="veiculoTabela && !carregandoTabela">
       <thead>
         <tr>
-          <th>Código - Vin</th>
+          <th>Código - PIN</th>
           <th>Odômetro</th>
           <th>Nível de Combustível</th>
           <th>Status</th>
@@ -87,17 +98,17 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ veiculoTabela.vin }}</td>
-          <td>{{ veiculoTabela.odometro }}Km</td>
-          <td>{{ veiculoTabela.combustivel }} %</td>
-          <td>
+          <td data-label="Código - PIN">{{ pinConsultado }}</td>
+          <td data-label="Odômetro">{{ veiculoTabela.odometro }}Km</td>
+          <td data-label="Nível de Combustível">{{ veiculoTabela.nivelCombustivel }} %</td>
+          <td data-label="Status">
             <span class="status-badge" [class.on]="veiculoTabela.status === 'on'"
                   [class.off]="veiculoTabela.status === 'off'">
               {{ veiculoTabela.status }}
             </span>
           </td>
-          <td>{{ veiculoTabela.lat }}</td>
-          <td>{{ veiculoTabela.long }}</td>
+          <td data-label="Lat.">{{ veiculoTabela.lat }}</td>
+          <td data-label="Long.">{{ veiculoTabela.long }}</td>
         </tr>
       </tbody>
     </table>

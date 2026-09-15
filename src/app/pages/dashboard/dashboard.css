@@ -11,7 +11,6 @@
   flex-direction: column;
 }
 
-/* ===== Cabeçalho ===== */
 .dashboard-header {
   display: flex;
   align-items: center;
@@ -186,7 +185,7 @@
 .veiculo-preview {
   display: flex;
   justify-content: center;
-  padding: 0 20px 10px;
+  padding: 28px 20px 36px;
 }
 
 .imagem-veiculo-central {
@@ -233,6 +232,21 @@
   color: #c0392b;
   font-size: 14px;
   margin-bottom: 12px;
+}
+
+.carregando {
+  color: #6b6b6b;
+  font-size: 14px;
+  padding: 0 20px 12px;
+}
+
+.select-options li.sem-resultado {
+  color: #9a9a9a;
+  cursor: default;
+}
+
+.select-options li.sem-resultado:hover {
+  background: transparent;
 }
 
 table {
@@ -283,16 +297,22 @@ tbody td {
   }
 
   .card {
+    flex: 0 1 auto;
     min-width: 0;
     padding: 10px 12px;
   }
 
   .card-value {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .veiculo-preview {
-    padding: 0 12px 8px;
+    padding: 18px 12px 26px;
+  }
+
+  .imagem-veiculo-central {
+    width: 78%;
+    max-width: 320px;
   }
 
   .tabela-veiculo {
@@ -312,16 +332,57 @@ tbody td {
     width: 100%;
   }
 
-  /* A tabela mantém uma largura mínima e rola na horizontal,
-     em vez de espremer os dados até ficarem ilegíveis */
-  table {
-    min-width: 560px;
-    font-size: 12px;
+  .tabela-veiculo table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
-  thead th,
-  tbody td {
-    padding: 8px 10px;
+  .tabela-veiculo table,
+  .tabela-veiculo tbody,
+  .tabela-veiculo tr {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tabela-veiculo tbody tr {
+    margin-bottom: 10px;
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .tabela-veiculo tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .tabela-veiculo tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: right;
+  }
+
+  .tabela-veiculo tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .tabela-veiculo tbody td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #6b6b6b;
+    text-align: left;
   }
 }
 
@@ -331,7 +392,7 @@ tbody td {
   }
 
   .card-value {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .icon-btn {

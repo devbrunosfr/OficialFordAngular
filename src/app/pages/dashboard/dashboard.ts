@@ -46,6 +46,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     'Bronco Sport': '2RFAASDY54E4HDU34875',
   };
 
+  // Mapa reverso: cobre os 6 VINs cadastrados na API (api.js -> /vehicleData),
+  // incluindo os que não têm 1:1 com pinsPorModelo (unidades extras da mesma frota).
+  private readonly modeloPorPin: Record<string, string> = {
+    '2FRHDUYS2Y63NHD22454': 'Ranger',
+    '2RFAASDY54E4HDU34874': 'Mustang',
+    '2FRHDUYS2Y63NHD22455': 'Territory',
+    '2RFAASDY54E4HDU34875': 'Bronco Sport',
+    '2FRHDUYS2Y63NHD22654': 'Ranger',
+    '2FRHDUYS2Y63NHD22854': 'Mustang',
+  };
+
   veiculos: Veiculo[] = [];
   veiculosFiltrados: Veiculo[] = [];
   veiculoSelecionado: Veiculo | null = null;
@@ -187,9 +198,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private sincronizarVeiculoSelecionadoPeloPin(pin: string): void {
-    const modelo = Object.keys(this.pinsPorModelo).find(
-      (nome) => this.pinsPorModelo[nome] === pin
-    );
+    const modelo = this.modeloPorPin[pin];
     const veiculo = modelo ? this.veiculos.find((v) => v.vehicle === modelo) : undefined;
 
     if (!veiculo) {
